@@ -1,0 +1,25 @@
+/**
+ * Copyright 2013 sina.com, Inc. All rights reserved.
+ * sina.com PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package com.netfinworks.site.core.common.util;
+
+
+/**
+ * 通用说明：
+ *
+ * @author <a href="mailto:qinde@netfinworks.com">qinde</a>
+ *
+ * @version 1.0.0  2013-11-20 下午1:38:59
+ *
+ */
+public class RadomUtil {
+    public static int SEED = 1000;
+
+    public static long createRadom() {
+        return Math.round(Math.random()*9999);
+    }
+    public static void main(String[] args) {
+        System.out.println(RadomUtil.createRadom());
+    }
+}

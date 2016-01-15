@@ -1,0 +1,208 @@
+package com.netfinworks.site.core.common.constants;
+
+/**
+ * <p>通用常量持有器 </p>
+ * @author eric
+ * @version $Id: CommonConstant.java, v 0.1 2013-7-16 下午1:52:57  Exp $
+ */
+public interface CommonConstant {
+    /** 编码 */
+    public static final String ENCODE                             = "UTF-8";
+    /**当前特约商户用户的session*/
+    final public static String SESSION_ATTR_NAME_CURRENT_ENTERPRISE_USER = "CURRENT_ENTERPRISE_USER";
+    /**当前企业用户的MemerId*/
+    final public static String SESSION_ATTR_NAME_CURRENT_ENTERPRISE_USER_ID = "CURRENT_ENTERPRICE_USER_ID";
+    /**当前特约商户的MemberName*/
+    final public static String KJT_ENTERPRISE_USER_NAME = "KJT_ENTERPRISE_USER_NAME";
+
+    /** 无操作地方*/
+    public static final String NO_URL                             = "#";
+    /** 本系统标示*/
+    public static final String SELF_MARK                          = "site";
+    /** 真:标记 */
+    public static final String TRUE_STRING                        = "Y";
+    /** 假:标记 */
+    public static final String FALSE_STRING                       = "N";
+
+    /** 请求方法 */
+    public static final String REQUEST_METHOD                     = "method";
+    /** 角色前缀 */
+    public static final String ROLE_PREFIX                        = "ROLE_";
+
+    //soap-success
+    public static final String RETURN_CODE_SUCCESS                = "0";
+
+    public static final long   MEMBER_LOCKED                      = 1;
+
+    public static final long   ACTIVE_STATUS                      = 1;
+
+    public static final String IMAGE_TYPE                         = "image";
+
+    public static final String SOURCE_CODE                       = "fj054";
+    
+    /**
+     * personal/enterpries url地址前缀
+     */
+    public static final String URL_PREFIX                         = "main";
+
+    final public static String SERVLET_ATTR_NAME_GLOBAL_RESOURCE  = "GLOBAL_RESOURCE";
+    /**当前用户的session*/
+    final public static String SESSION_ATTR_NAME_CURRENT_USER     = "CURRENT_USER";
+    /**当前用户的session*/
+    final public static String SESSION_ATTR_NAME_SET_PASSWORD_USER     = "SESSION_ATTR_NAME_SET_PASSWORD_USER";
+    /**查询是否状态的时间*/
+    final public static String SESSION_ATTR_NAME_CURRENT_ONLINE_TIME = "CURRENT_ONLINE_TIME";
+    /**查询是否在线的次数*/
+    final public static String SESSION_ATTR_NAME_CURRENT_ONLINE_COUNT = "CURRENT_ONLINE_COUNT";
+    /**当前收款人信息*/
+    final public static String SESSION_ATTR_NAME_CURRENT_PAYER    = "CURRENT_PAYER";
+    /**当前转账交易信息*/
+    final public static String SESSION_ATTR_NAME_CURRENT_TRANSFER = "CURRENT_TRANSFER";
+    /**交易密码状态*/
+    final public static String SESSION_PAY_PASSWD_STATUS          = "SESSION_PAY_PASSWD_STATUS";
+
+    final public static String SESSION_ATTR_NAME_KAPTCHA_KEY      = "KAPTCHA";
+    final public static String SESSION_ATTR_NAME_SOURCE           = "SOURCE";
+
+    final public static String SESSION_CERTIFICATION              = "CERTIFICATION";
+    
+    //----------addby jxh 20150105 start------------------
+    final public static String USERTYPE_PERSON = "person";
+    final public static String USERTYPE_ENTERPRISE = "enterprise";
+    /**当前普通用户的MemberName*/
+    final public static String KJT_PERSON_USER_NAME = "KJT_PERSON_USER_NAME";
+    final public static String SESSION_ATTR_NAME_CURRENT_PERSONAL_NOT_LOGIN = "SESSION_ATTR_NAME_CURRENT_PERSONAL_NOT_LOGIN";
+    //----------addby jxh 20150105 end------------------
+    
+    //----------addby zy 20141128 start------------------
+    /**当前普通会员用户的session*/
+    final public static String SESSION_ATTR_NAME_CURRENT_PERSONAL_USER = "CURRENT_PERSONAL_USER";
+    /**当前个人用户的MemerId*/
+    final public static String SESSION_ATTR_NAME_CURRENT_PERSONAL_USER_ID = "CURRENT_PERSONAL_USER_ID";
+    /**当前用户的LoginName*/
+    final public static String SESSION_ATTR_NAME_CURRENT_USER_LOGINNAME = "CURRENT_USER_LOGINNAME";
+    /**当前普通用户的MemberName*/
+    final public static String PERSON_USER_NAME = "PERSON_USER_NAME";
+   //----------addby zy 20141128 end------------------
+    
+    /**用户存在*/
+    final public static String USER_NOT_EXIST                     = "103";
+    /**操作员不存在*/
+    final public static String OPERATOR_NOT_EXIST                 = "201";
+
+    /** 个人钱包应用ID */
+    final public static String PERSONAL_APP_ID                    = "fj050";
+
+    /** 个人钱包应用ID */
+    final public static String PERSONAL_WAP_ID                    = "fj176";
+    /**
+     * 商户钱包
+     */
+    final public static String ENTERPRISE_APP_ID                  = "fj059";
+    /**
+     * reset交易密码url
+     */
+    public static final String RESET_PAYPASSWORD_URL              = "resetPayPassWordUrl";
+    /**
+     * 邮箱
+     */
+    public static final String MEMBER_EMAIL                       = "email";
+    /**
+     * 曾用提现账号
+     */
+    public static final String WITHDRAWAL_CARDID                  = "withdrawalCardId";
+    /**
+     * 曾用充值账号
+     */
+    public static final String RECHARGE_CARDID                    = "rechargeCardId";
+    /**
+     * 钱包缓存命名空间
+     */
+    public static final String WALLET_NAMESPACE_CACHE             = "walletcache";
+    /**
+     *
+     */
+    public static final String NOTIFY_EMAIL                       = "notifyEmail";
+    public static final String NOTIFY_MOBILE                      = "notifyMobile";
+    /**
+     *
+     */
+    public static final String NOTIFY_MESSAGE                     = "notifyMessage";
+
+    /**
+     * 手机验证码有效时间
+     */
+    public static final long   VALIDITY                           = 360L;
+
+    /**
+     * 钱包转账落地交易订单的partnerId
+     */
+    public static final String TRADE_PARTNER_ID                   = "innerMember";
+
+    public static final String USER_NAME                          = "userName";
+
+    public static final String WAIT_BUYER_PAY                     = "100";
+
+    public static final String WAIT_BUYER_PAY_BANK                = "110";
+
+    public static final String REFUND_ING                         = "900";
+    public static final String REFUND_SUCCESS                     = "951";
+    public static final String REFUND_FAIL                        = "952";
+
+    /**证书*/
+    public static final String _base64_cert                       = "base64_cert";
+
+    public static final String CACHE_NAMESPACE_PAY_PASSWORD_SALT  = "PAY_PASSWORD_SALT";
+
+    /**账户开户处理*/
+    public static final String MEMBER_SET_STATUS                  = "model";
+
+    public static final String MEMBER_ACTIVE_MOBILE               = "MEMBER_ACTIVE_MOBILE";
+
+    /**转账通知的信息扩展字段key */
+    public static final String TRADE_NOTIFY_KEY                   = "notify_info";
+    /**转账通知的手机号扩展字段key */
+    public static final String TRADE_NOTIFY_MOBILE_KEY            = "notify_mobile";
+    /**转账通知的备注扩展字段key */
+    public static final String TRADE_NOTIFY_MEMO_KEY              = "notify_memo";
+    /**转账通知的模板扩展字段key */
+    public static final String TRADE_NOTIFY_TEMPLATE_KEY          = "notify_template";
+    /**转账通知app的模板扩展字段key */
+    public static final String TRADE_NOTIFY_APP_TEMPLATE_KEY      = "notify_template_app";
+
+    public static final String ERROR                              = "ERROR";
+    /**判断是否为剩余次数*/
+    public static final String REMAINNUM                          = "256";
+    /**交易密码被锁*/
+    public static final String PAYPASSWD_LOCKED                   = "264";
+    /**登录密码被锁*/
+    public static final String LOGINPASSWD_LOCKED = "274";
+    
+    public static String       ERROR_NOTRIGHT                     = "noright";
+    public static String       ERROR_LOCKED                       = "locked";
+    public static String       ERROR_PARTEN                       = "parten";
+    public static String       ERROR_SAME                         = "same";
+    public static String       ERROR_NOT_SAME                     = "notsame";
+
+    public static String       DEFAULT_SALT                       = "ac5e940b94a51609788f38c6db70f39b";
+
+    public static String       SESSION_USER_ID                    = "current_user_id";
+
+    public static String       SESSION_ONLINE_ID                  = "current_online_id";
+    public static int          INDVALIDE_COUNTER                  = 15;
+    
+
+    /**用户能重置登录密码的登录会员信息*/
+    public static String SESSION_RESET_LOGIN_PWD_MEMBER="SESSION_RESET_LOGIN_PWD_MEMBER";
+    /**用户能否重置登录密码的标志位*/
+    public static String SESSION_CAN_RESET_LOGIN_PWD_FLAG="SESSION_CAN_RESET_LOGIN_PWD_FLAG";
+
+    /**用户能重置登录密码的登录会员信息-企业会员*/
+    public static String SESSION_RESET_LOGIN_PWD_MEMBER_ENT="SESSION_RESET_LOGIN_PWD_MEMBER_ENT";
+    /**用户能否重置登录密码的标志位-企业会员*/
+    public static String SESSION_CAN_RESET_LOGIN_PWD_FLAG_ENT="SESSION_CAN_RESET_LOGIN_PWD_FLAG_ENT";
+
+    /**登录密码和交易密码相同*/
+    public static String ERROR_PAYPWD_EQUAL_LOGINPWD = "PAYPWD_EQUAL_LOGINPWD";
+
+}

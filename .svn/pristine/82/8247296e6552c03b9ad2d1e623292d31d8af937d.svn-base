@@ -1,0 +1,172 @@
+package com.netfinworks.site.core.common.util;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+
+/**
+ * <p>配置文件中注入的参数</p>
+ *
+ * @author Zhang Yun
+ * @version $Id: AppProperties.java, v 0.1 14-1-15 上午10:30 zhangyun Exp $
+ */
+public class AppProperties {
+
+    @Value("#{properties['user.login.url']}")
+    private String userLoginUrl;
+
+    @Value("#{properties['wap.user.login.url']}")
+    private String wapUserLoginUrl;
+
+    @Value("#{properties['user.load.url']}")
+    private String userLoadUrl;
+
+    @Value("#{properties['user.check.url']}")
+    private String userOnlineCheckUrl;
+
+    @Value("#{properties['user.login.mock']}")
+    private String userLoginMock;
+
+    @Value("#{properties['vf.login.wap.url']}")
+    private String loginHandleUrl;
+
+    @Value("#{properties['user.info.url']}")
+    private String userInfoUrl;
+    
+    @Value("#{properties['platform.host.url']}")
+    private String platformHostUrl;
+
+    /**
+	 * 第三方登录验证通过后回调地址
+	 */
+	@Value("#{properties['callback.site.login.url']}")
+	private String callbackSiteLoginUrl;
+	
+	/**
+	 * 应用的根域名(单点登录信息需要写在根域名下cookie中)
+	 */
+	@Value("#{properties['root.domain']}")
+	private String rootDomain;
+    
+    @Value("#{properties['singSecret']}")
+    private String singSecret         = "ba0b364002358af20ca64fcb73583532";
+    
+    @Value("#{properties['cash.deliver.address']}")
+    private String cashDeliverAddress;
+    
+    @Value("#{properties['partner_id']}")
+    private String partnerId;
+
+    public String getUserLoginUrl() {
+        return userLoginUrl;
+    }
+
+    public void setUserLoginUrl(String userLoginUrl) {
+        this.userLoginUrl = userLoginUrl;
+    }
+
+    public String getUserLoadUrl() {
+        return userLoadUrl;
+    }
+
+    public void setUserLoadUrl(String userLoadUrl) {
+        this.userLoadUrl = userLoadUrl;
+    }
+
+    public String getUserOnlineCheckUrl() {
+        return userOnlineCheckUrl;
+    }
+
+    public void setUserOnlineCheckUrl(String userOnlineCheckUrl) {
+        this.userOnlineCheckUrl = userOnlineCheckUrl;
+    }
+
+    public String getUserLoginMock() {
+        return userLoginMock;
+    }
+
+    public void setUserLoginMock(String userLoginMock) {
+        this.userLoginMock = userLoginMock;
+    }
+
+    public String getLoginHandleUrl() {
+        return loginHandleUrl;
+    }
+
+    public void setLoginHandleUrl(String loginHandleUrl) {
+        this.loginHandleUrl = loginHandleUrl;
+    }
+
+    public String getWapUserLoginUrl() {
+        return wapUserLoginUrl;
+    }
+
+    public void setWapUserLoginUrl(String wapUserLoginUrl) {
+        this.wapUserLoginUrl = wapUserLoginUrl;
+    }
+
+    public String getUserInfoUrl() {
+        return userInfoUrl;
+    }
+
+    public void setUserInfoUrl(String userInfoUrl) {
+        this.userInfoUrl = userInfoUrl;
+    }
+
+    public String getPlatformHostUrl() {
+		return platformHostUrl;
+	}
+
+	public void setPlatformHostUrl(String platformHostUrl) {
+		this.platformHostUrl = platformHostUrl;
+	}
+	
+	public String getCallbackSiteLoginUrl() {
+		return callbackSiteLoginUrl;
+	}
+
+	public void setCallbackSiteLoginUrl(String callbackSiteLoginUrl) {
+		this.callbackSiteLoginUrl = callbackSiteLoginUrl;
+	}
+
+	public String getRootDomain() {
+		return rootDomain;
+	}
+
+	public void setRootDomain(String rootDomain) {
+		this.rootDomain = rootDomain;
+	}
+
+	public String getSingSecret() {
+        return singSecret;
+    }
+
+    public void setSingSecret(String singSecret) {
+        this.singSecret = singSecret;
+    }
+    
+    
+
+    public String getCashDeliverAddress() {
+		return cashDeliverAddress;
+	}
+
+	public void setCashDeliverAddress(String cashDeliverAddress) {
+		this.cashDeliverAddress = cashDeliverAddress;
+	}
+	
+	
+	
+
+	public String getPartnerId() {
+		return partnerId;
+	}
+
+	public void setPartnerId(String partnerId) {
+		this.partnerId = partnerId;
+	}
+
+	public boolean mock() {
+        return StringUtils.equals(getUserLoginMock(), "true");
+    }
+
+}

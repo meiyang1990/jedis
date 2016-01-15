@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util.xsd"
+    default-autowire="byName">
+
+    <aop:aspectj-autoproxy />
+    <context:annotation-config />
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+	        <list>
+	            <value>file:/opt/pay/config/jedis/app.properties</value>
+	        </list>
+        </property>
+    </bean>
+
+
+    <import resource="classpath:META-INF/spring/jedis-service-facade.xml" />
+    <import resource="classpath:META-INF/spring/beanContext.xml" />
+   
+	
+	<import resource="classpath*:META-INF/spring/**/*-bean.xml"/>
+
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>customOrderRepository</value>
+                <value>functionRepository</value>
+                <value>functionContentRepository</value>
+                <!-- <value>memberRepository</value> <value>roleRepository</value> -->
+                <value>industryRepository</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <value>dalLoggerInterceptor</value>
+        </property>
+    </bean>
+
+
+</beans>

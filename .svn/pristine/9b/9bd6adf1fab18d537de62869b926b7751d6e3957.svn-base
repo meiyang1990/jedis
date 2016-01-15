@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <parent>
+        <groupId>com.netfinworks.jedis</groupId>
+        <artifactId>jedis-domainservice-parent</artifactId>
+        <version>2.0.1-mm-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jedis-domainservice-ent</artifactId>
+    <name>reward domainservice member</name>
+    <description>reward application</description>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>com.netfinworks.ucs</groupId>
+			<artifactId>ucs-support-annotation</artifactId>
+	    </dependency>
+		<!-- self -->
+        <dependency>
+            <groupId>com.netfinworks.reward</groupId>
+            <artifactId>reward-domain-main</artifactId>
+            <version>2.0.1-mm-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netfinworks.reward</groupId>
+            <artifactId>reward-core-dal</artifactId>
+            <version>2.0.1-mm-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netfinworks.reward</groupId>
+            <artifactId>reward-ext-integration</artifactId>
+            <version>${reward.version}</version>
+        </dependency>
+	    <dependency>
+	    	<groupId>com.netfinworks.reward</groupId>
+	        <artifactId>reward-core-common</artifactId>
+	        <version>${reward.version}</version>
+	    </dependency>
+
+	    <!-- ocx -->
+	    <dependency>
+			<groupId>ocx</groupId>
+			<artifactId>AESWithJCE</artifactId>
+		</dependency>
+    </dependencies>
+</project>

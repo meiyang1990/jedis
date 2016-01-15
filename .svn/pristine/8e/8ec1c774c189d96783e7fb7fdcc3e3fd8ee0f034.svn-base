@@ -1,0 +1,48 @@
+package com.netfinworks.site.core.common.util;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class CalendarUtils {
+    public static final String secondFormat = "yyyy-MM-dd HH:mm:ss";
+    public static Date parseDate(String Date) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat(secondFormat);
+
+        if ((Date == null) || (Date.length() != secondFormat.length())) {
+            throw new ParseException("length is not right", 0);
+        }
+        return dateFormat.parse(Date);
+    }
+
+    public static void main(String[] args) throws ParseException {
+        System.out.println(CalendarUtils.parseDate("2013-12-09 00:00:01"));
+    }
+
+    /**
+     * 获取x月前最后一天
+     * @param x
+     * @return
+     */
+    public static Date getXPrevMonthEndDate(int x){
+        Calendar ca = Calendar.getInstance();    
+        ca.add(Calendar.MONTH, 0-x);
+        ca.set(Calendar.DAY_OF_MONTH,ca.getActualMaximum(Calendar.DAY_OF_MONTH));//请一个月的最后一天
+        return ca.getTime();
+     }
+    
+    /**
+     * 获取x月前最后一天
+     * @param x
+     * @return
+     */
+    public static Date getXPrevMonthFirstDate(int x){
+        Calendar ca = Calendar.getInstance();    
+        ca.add(Calendar.MONTH, 0-x);
+        ca.set(Calendar.DAY_OF_MONTH,1);//设置为1号,当前日期既为第一天
+        return ca.getTime();
+     }
+    
+}

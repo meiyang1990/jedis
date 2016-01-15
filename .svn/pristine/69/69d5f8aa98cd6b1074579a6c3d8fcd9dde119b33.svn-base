@@ -1,0 +1,178 @@
+package com.netfinworks.site.core.common.util;
+
+import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import net.sf.json.JSONObject;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.StringUtils;
+
+/**
+ * @description 字符操作工具类
+ * @author yangy
+ * @version 1.0
+ * @date 2012-07-19
+ */
+public class StringUtil {
+	
+	private static int count20  = 0;
+
+	// 分割字符串
+	public static String[] split(String str, String token) {
+		return StringUtils.splitPreserveAllTokens(str, token);
+	}
+	/**
+	 * 判断操作结果是否成功
+	 * @param jsonStr
+	 * @return
+	 */
+	public static boolean isTrueJson(JSONObject json)
+	{
+		String status = json.getString("is_success");
+		
+		if("T".equals(status))
+		{
+			return true;
+		}
+		return false;
+	}
+	// 是否为空
+	public static boolean isEmpty(String str) {
+		return (str == null || str.trim().length() == 0);
+	}
+
+	// 补位
+	public static String formatString(String str, int strLength) {
+		int strLen = str.length();
+		if (strLen < strLength) {
+			while (strLen < strLength) {
+				StringBuffer sb = new StringBuffer();
+				sb.append("0").append(str);
+				str = sb.toString();
+				strLen = str.length();
+			}
+		} else {
+			str = str.substring(0, strLength);
+		}
+		return str;
+	}
+
+	// 生产20位序列号
+	public static String createSerial20() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssSSS");
+		count20++;
+		if (count20 == 100000) {
+			count20 = 0;
+		}
+		String par = formatString(String.valueOf(count20), 5);
+		return sdf.format(new Date()) + par;
+	}
+
+	// 为空时返回默认值
+	public static String getDefultStr(String str) {
+		if (str == null || str.length() == 0 || ("null").equals(str)) {
+			return "";
+		} else {
+			return str;
+		}
+	}
+
+	// 为空时返回默认值
+	public static String getDefultStr(Object obj) {
+		String result = null;
+		if(obj == null){
+			result = "";
+		}else{
+			String str = String.valueOf(obj);
+			if(str == null || str.length() == 0 || ("null").equals(str)) {
+				result = "";
+			}else{
+				result = str;
+			}
+		}
+		return result;
+	}
+	
+	// 截取2个标示符之间的字符串
+	public static String substring(String str, String open, String close) {
+		if ((str == null) || (open == null) || (close == null)) {
+			return null;
+		}
+		int start = str.indexOf(open);
+		if (start != -1) {
+			int end = str.indexOf(close, start + open.length());
+			if (end != -1) {
+				return str.substring(start + open.length(), end);
+			}
+		}
+		return null;
+	}
+
+
+
+	// 格式化金额
+	public static String formatAmount(String amount) {
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		return df.format(new BigDecimal(amount));
+	}
+	
+	
+	// 金额格式转化：从分转化成元
+	public static String formatAmountFromFenToYuan(String amount){
+		BigDecimal bigDecimal = new BigDecimal(amount);
+		bigDecimal = bigDecimal.divide(new BigDecimal("100"));
+		return bigDecimal.toString();
+	}
+	
+	
+	// 获取到短信信息
+	// 第一参数为你要获取的资源文件id
+	// 第二之后为占位符
+//	public static String getSMSStr(String resourceId ,String... str) {
+//		String resourceStr = Constants.RB.getString(resourceId);
+//		String result = MessageFormat.format(resourceStr,str);
+//		return result;
+//	}
+
+	// 获取根路径
+	public static String getRootPath() {
+		return System.getProperty("user.dir");
+	}
+
+	// base64加密
+	public static String base64Encode(String var,String encoding ) {
+		String result = null;
+		try {
+			result = Base64.encodeBase64String(var.getBytes(encoding));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	// base64解密
+	public static String base64Decode(String var,String encoding ) {
+		String result = null;
+		try {
+			result = new String(Base64.decodeBase64(var), encoding);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	
+	//拼接报文时，如果对象为空则将对象转为空字符串
+	public static Object parseNullMsg(Object obj){
+
+		return obj!=null?obj:"";
+		
+	}
+	
+
+	
+}

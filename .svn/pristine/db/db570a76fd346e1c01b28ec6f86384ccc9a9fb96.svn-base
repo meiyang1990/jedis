@@ -1,0 +1,17 @@
+#company infomation for Guarantee
+
+#projectname,companyname,Legal person,address 4type
+projectAllInfo =\u4E9A\u6D32\u4FDD\u7406, \u4E9A\u6D32\u4FDD\u7406\uFF08\u6DF1\u5733\uFF09\u6709\u9650\u516C\u53F8,\u674E\u6625\u971E,\u6DF1\u5733\u5E02\u798F\u534E\u4E09\u8DEF\u5353\u8D8A\u4E16\u7EAA\u4E2D\u5FC33\u53F7\u697CB\u680B2717
+projectAllInfo2  = \u6E56\u5357\u4E2D\u5FA1,\u6E56\u5357\u4E2D\u5FA1\u62C5\u4FDD\u6709\u9650\u516C\u53F8,\u9B4F\u4E1C,\u957F\u6C99\u5E02\u5F00\u798F\u533A\u6E58\u6C5F\u4E2D\u8DEF\u4E00\u6BB552\u53F7\u51EF\u4E50\u56FD\u9645\u57CE9\u680B17\u697C
+
+#Repayment time
+RepaymentDayHandle=\u65E5\u3002\uFF08\u82E5\u5F53\u6708\u6CA1\u6709\u5BF9\u5E94\u7684\u65E5\u671F\uFF0C\u5219\u8FD8\u6B3E\u65E5\u4E3A\u5F53\u6708\u6700\u540E\u4E00\u5929\u3002\u8282\u5047\u65E5\u4E0D\u987A\u5EF6\uFF09;
+repayYear =\u5E74,\u4ECE
+repayMonth= \u6708
+repayDay = \u65E5,\u65E5\u8D77\uFF0C\u6BCF\u6708
+
+
+#service1 =http://www.88mmmoney.com/mmmoney/services/MMMoneyService
+service2 =http://www.88mmmoney.com/mmmoney/services/MMMoneyService
+service1 =http://www.88mmmoney.com/mmmoney/services/MMMoneyService
+RoadFiles =webapps/mmmoney/WEB-INF/classes

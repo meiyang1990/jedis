@@ -1,0 +1,113 @@
+package com.netfinworks.site.core.common.util;
+
+import org.apache.commons.lang.StringUtils;
+
+public class StarUtil {
+
+    /**
+     * 手机星号处理
+     * @param mobile
+     * @return
+     */
+    public static String mockMobile(String mobile) {
+        if (StringUtils.isBlank(mobile)) {
+            return null;
+        }
+        if (mobile.length() < 10) {
+            return mobile;
+        }
+        return mobile.substring(0, 3) + "****" + mobile.substring(7);
+    }
+
+    /**
+     * 银行卡星号处理
+     * @param mobile
+     * @return
+     */
+    public static String mockBankCard(String bankCard) {
+        if (StringUtils.isBlank(bankCard)) {
+            return null;
+        }
+        if (bankCard.length() < 16) {
+            return bankCard;
+        }
+        if (bankCard.length() <= 16) {
+            return bankCard.substring(0, 4) + "*******" + bankCard.substring(12);
+        } else {
+            return bankCard.substring(0, 4) + "*******" + bankCard.substring(15);
+        }
+    }
+    /**
+     * 银行卡星号和空格处理
+     * @param mobile
+     * @return
+     */
+    public static String mockBankCardByBlank(String bankCard) {
+        if (StringUtils.isBlank(bankCard)) {
+            return "";
+        }
+        if(bankCard.length() <=4) {
+            return "尾号 " + bankCard;
+        }
+        return "尾号 " + bankCard.substring(bankCard.length()-4);
+    }
+
+    /**
+     * 实名星号处理
+     * @param mobile
+     * @return
+     */
+    public static String mockRealName(String realName) {
+        if (StringUtils.isBlank(realName)) {
+            return null;
+        }
+        StringBuffer result = new StringBuffer();
+        if(realName.length() > 1) {
+            result.append("*");
+            result.append(realName.substring(1));
+            return result.toString();
+        }
+        return realName;
+    }
+    
+    /**
+     * 银行卡截取
+     * @param bankCard
+     * @return
+     */
+    public static String maskBankCard(String bankCard) {
+        if (StringUtils.isBlank(bankCard)) {
+            return null;
+        }
+        return "**********" + bankCard.substring(bankCard.length() - 4);
+
+    }
+
+    public static String maskIdCard(String idCard) {
+        if (StringUtils.isBlank(idCard)) {
+            return null;
+        }
+        int length = idCard.length();
+        if (length < 3) {
+            return idCard;
+        }
+        return idCard.substring(0, 1) + "****************" + idCard.substring(idCard.length() - 1);
+    }
+    
+    /**
+     * 银行卡截取
+     * @param bankCard
+     * @return
+     */
+    public static String trim4BankCard(String bankCard) {
+        if (StringUtils.isBlank(bankCard)) {
+            return null;
+        }
+        int length = bankCard.length();
+        if (length <= 4) {
+            return bankCard;
+        } else {
+            return bankCard.substring(bankCard.length() - 4);
+        }
+    }
+}

@@ -1,0 +1,58 @@
+package com.netfinworks.site.core.common.util;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.netfinworks.common.util.DateUtil;
+
+public class DateUtils {
+    public static final String secondFormat = "yyyy-MM-dd HH:mm:ss";
+    public static final String showMonth = "M";
+    
+    
+    public static Date fromStrToDate(String dateStr){
+    	SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
+    	try {
+			return format.parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+    }
+    
+    
+	/**
+	 * @param date
+	 * @return 格式化日期
+	 */
+	public static String getDateFormateStr(Date date){
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
+		return  format.format(date);
+		
+	}
+	
+    public static Date parseDate(String Date) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat(secondFormat);
+
+        if ((Date == null) || (Date.length() != secondFormat.length())) {
+            throw new ParseException("length is not right", 0);
+        }
+        return dateFormat.parse(Date);
+    }
+
+    public static void main(String[] args) throws ParseException {
+//        System.out.println(DateUtils.parseDate("2013-12-09 00:00:01"));
+        System.out.println(DateUtil.formatMonth(new Date()));
+        System.out.println(DateUtils.getMonth(new Date()));
+        
+    }
+    public static String getMonth(Date date){
+        DateFormat dateFormat = new SimpleDateFormat(showMonth);
+        return DateUtil.getDateString(date, dateFormat);
+    }
+    
+    
+}

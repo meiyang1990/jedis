@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="jedis-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="jedis-ext-integration-2.0.1-mm-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jedis-ext-integration/jedis-ext-integration">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jedis-core-common-2.0.1-mm-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jedis-core-common/jedis-core-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jedis-service-facade-2.0.1-mm-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jedis-service-facade/jedis-service-facade">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jedis-ext-service-2.0.1-mm-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jedis-ext-service/jedis-ext-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="jedis-web"/>
+        <property name="java-output-path" value="/jedis-web/target/classes"/>
+    </wb-module>
+</project-modules>

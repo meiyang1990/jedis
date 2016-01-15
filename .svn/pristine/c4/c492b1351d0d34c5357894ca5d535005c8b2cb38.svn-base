@@ -1,0 +1,139 @@
+package com.netfinworks.site.core.common.util;
+
+import java.security.Key;
+import java.security.spec.AlgorithmParameterSpec;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.IvParameterSpec;
+
+import org.apache.commons.codec.binary.Base64;
+
+public class DesUtil {
+    private final static String KEY           = "&%#@?,:*";
+    public static final String  ALGORITHM_DES = "DES/CBC/PKCS5Padding";
+    public static final byte[] IV = { 0x12, 0x34, 0x56, 0x78, (byte) 0x90, (byte) 0xAB, (byte) 0xCD, (byte) 0xEF };
+
+    /**
+     * DES算法，加密
+     *
+     * @param data 待加密字符串
+     * @return 加密后的字节数组，一般结合Base64编码使用
+     * @throws CryptException 异常
+     */
+    public static String encode(String data) throws Exception {
+        return encode(KEY, data.getBytes());
+    }
+    /**
+     * DES算法，加密
+     *
+     * @param data 待加密字符串
+     * @param key  加密私钥，长度不能够小于8位
+     * @return 加密后的字节数组，一般结合Base64编码使用
+     * @throws CryptException 异常
+     */
+    public static String encode(String key, String data) throws Exception {
+        return encode(key, data.getBytes());
+    }
+
+    /**
+     * DES算法，加密
+     *
+     * @param data 待加密字符串
+     * @param key  加密私钥，长度不能够小于8位
+     * @return 加密后的字节数组，一般结合Base64编码使用
+     * @throws CryptException 异常
+     */
+    public static String encode(String key, byte[] data) throws Exception {
+        try {
+            DESKeySpec dks = new DESKeySpec(key.getBytes());
+
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            //key的长度不能够小于8位字节
+            Key secretKey = keyFactory.generateSecret(dks);
+            Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
+            IvParameterSpec iv = new IvParameterSpec(IV);
+            AlgorithmParameterSpec paramSpec = iv;
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, paramSpec);
+
+            byte[] bytes = cipher.doFinal(data);
+            return Base64.encodeBase64String(bytes);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    /**
+     * DES算法，解密
+     *
+     * @param data 待解密字符串
+     * @param key  解密私钥，长度不能够小于8位
+     * @return 解密后的字节数组
+     * @throws Exception 异常
+     */
+    public static byte[] decode(String key, byte[] data) throws Exception {
+        try {
+            DESKeySpec dks = new DESKeySpec(key.getBytes());
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            //key的长度不能够小于8位字节
+            Key secretKey = keyFactory.generateSecret(dks);
+            Cipher cipher = Cipher.getInstance(ALGORITHM_DES);
+            IvParameterSpec iv = new IvParameterSpec(IV);
+            AlgorithmParameterSpec paramSpec = iv;
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, paramSpec);
+            return cipher.doFinal(data);
+        } catch (Exception e) {
+            //         e.printStackTrace();
+            throw new Exception(e);
+        }
+    }
+
+    /**
+     * 获取编码后的值
+     * @param key
+     * @param data
+     * @return
+     * @throws Exception
+     * @throws Exception
+     */
+    public static String decodeValue(String key, String data) throws Exception {
+        byte[] datas;
+        String value = null;
+
+        datas = decode(key, Base64.decodeBase64(data));
+
+        value = new String(datas);
+        if (value.equals("")) {
+            throw new Exception();
+        }
+        return value;
+    }
+    /**
+     * 获取编码后的值
+     * @param key
+     * @param data
+     * @return
+     * @throws Exception
+     * @throws Exception
+     */
+    public static String decodeValue(String data) throws Exception {
+        byte[] datas;
+        String value = null;
+
+        datas = decode(KEY, Base64.decodeBase64(data));
+
+        value = new String(datas);
+        if (value.equals("")) {
+            throw new Exception();
+        }
+        return value;
+    }
+
+    public static void main(String[] a) throws Exception {
+     // String data = "pGM72YxKGoHMn/1RsE6Ap5DIZEQnBX/BZtvb2iyxelJPmSAU6vHbkD/2+lAQ4OqQe3aQH3YzW1gcgWiVIrXMcGQ3qXishhOjp/yL7ci1LPjDMulXuAn9L5YFPVZqhnF0evOV7Bkl3YPV8PzQTZRnsiUlsdaZVCYGFRrR+HwRkxDy0izbBasCDkvom+ono1CZ8lxNRnQ+fh+CvoGFJ1kLVzflatAv/T1nrlALZQudnWmsMKt6D83Er6BmhTai+Ps2";
+        String data = "pGM72YxKGoFA8K4B6t2Pf5RZejJkmYtYvKAMgIX6+XO2lL96tp9HR3R5oG+FVol2jun/VpZyZqBXkHqjI13Sk/+bmOabMK+vV+nZUWDRr+bQTh4ssEM0Kz1+kC7bDFrb92dQtFgULSHiEO62Yg+lBFuJPqvvNEPBO/EQVz+22bapcyKUjpaKSvVheQyxo9lY8g18kknomrxLFdWyr5InRE08wc/b+sy8zzbbYyR2Qj4g/kFThhU7K0R9XVZxNCDoClDDhrZ9HL5NpGRCiObOEiQBWCGKo4+cm698lYP1t77PghKsLYOmnp6/yrw2Z4fylFfycMnC83PIb46G1/s10VEHXzy0XvSxAjjNjBAKvqL51hIlGXbF+d/YCiSsDXSER2j5PaG72UdMA8SrIn4Y4w==";
+        System.out.println(decodeValue(KEY, data));
+        String source =decodeValue(KEY, data);
+        System.out.println(encode(KEY, source));
+    }
+}

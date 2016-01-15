@@ -1,0 +1,154 @@
+package com.mama.jedis.service.facade.redis;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisShardInfo;
+import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
+
+/**
+ * @author chenmeiyang
+ *
+ */
+public class RedisFactory {
+	
+	private static Logger logger = LoggerFactory.getLogger(RedisFactory.class);
+	
+    private List<String> host;//redis服务器
+    private long maxWaitTime;//最大等待时间
+    private int maxIdle;//最大空闲连接数
+    private int maxActive;//最大连接数
+    private int minIdle;//初始化连接数
+    private boolean testOnBorrow;//进行校验
+    private int timeOut;//超时时长
+    private String password;//密码
+    private static List<JedisShardInfo> shards ;
+    private static ShardedJedisPool pool;
+    private static ShardedJedis jedis;
+    
+    public RedisFactory(List<String> host ) {
+
+        if(host.size()!=0){
+            for (int i = 0; i < host.size(); i++) {        
+                String h[] = ((String) this.host.get(i)).split(":");     
+                shards = Arrays.asList(new JedisShardInfo(h[0].trim(),Integer.parseInt(h[1].trim())));
+            }
+        }else{
+            logger.info("请检查Redis配置，host项为必填项！格式[IP:PORT]");
+        }
+      
+        //数据初始化
+//        this.init();
+
+    }
+    
+    /**
+     * chenmeiyang
+     * 数据初始化
+     */
+    private void init(){
+    	
+        for(int i=0;i<this.shards.size();i++){
+        	JedisShardInfo info = shards.get(i);
+        	info.setPassword(this.password);
+        	info.setConnectionTimeout(this.timeOut);
+        }
+        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        poolConfig.setMaxIdle(this.maxIdle);
+        poolConfig.setMaxWaitMillis(this.maxWaitTime);
+        pool = new ShardedJedisPool( poolConfig , shards );
+        jedis = pool.getResource(); 
+        
+        logger.info("============="+this.timeOut);
+    	
+    }
+
+
+	public synchronized ShardedJedis getSingletonInstance(){
+        return jedis;
+    }
+    
+    public synchronized static void returnResource(){
+        pool.returnResource(jedis);
+    }
+    
+    public synchronized static void destroy(){
+        pool.destroy();
+    }
+
+
+	public long getMaxWaitTime() {
+		return maxWaitTime;
+	}
+
+
+	public void setMaxWaitTime(long maxWaitTime) {
+		this.maxWaitTime = maxWaitTime;
+	}
+
+
+	public int getMaxIdle() {
+		return maxIdle;
+	}
+
+
+	public void setMaxIdle(int maxIdle) {
+		this.maxIdle = maxIdle;
+	}
+
+
+	public int getMaxActive() {
+		return maxActive;
+	}
+
+
+	public void setMaxActive(int maxActive) {
+		this.maxActive = maxActive;
+	}
+
+
+	public int getMinIdle() {
+		return minIdle;
+	}
+
+
+	public void setMinIdle(int minIdle) {
+		this.minIdle = minIdle;
+	}
+
+
+	public boolean isTestOnBorrow() {
+		return testOnBorrow;
+	}
+
+
+	public void setTestOnBorrow(boolean testOnBorrow) {
+		this.testOnBorrow = testOnBorrow;
+	}
+
+
+	public int getTimeOut() {
+		return timeOut;
+	}
+
+
+	public void setTimeOut(int timeOut) {
+		this.timeOut = timeOut;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+}

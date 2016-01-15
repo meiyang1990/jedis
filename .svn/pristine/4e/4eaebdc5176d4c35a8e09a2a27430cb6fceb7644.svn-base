@@ -1,0 +1,237 @@
+/**
+ * Copyright 2013 sina.com, Inc. All rights reserved.
+ * sina.com PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package com.netfinworks.site.core.common.util;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+import javax.swing.text.NumberFormatter;
+
+import org.apache.commons.lang.math.NumberUtils;
+import org.apache.velocity.runtime.parser.node.MathUtils;
+
+import com.netfinworks.common.util.money.Money;
+
+/**
+ * 通用说明：
+ *
+ * @author <a href="mailto:qinde@netfinworks.com">qinde</a>
+ *
+ * @version 1.0.0  2013-11-20 下午1:38:59
+ *
+ */
+public class MoneyUtil {
+    public static int SEED = 1000;
+
+    public static String getAmount(Money money) {
+        if (money == null) {
+            return "0";
+        }  
+        return money.getAmount().toString();
+    }
+
+    public static String getAmountNum(double money) {
+        String retValue = null;
+        retValue = new DecimalFormat("#0.00").format(money);
+        return retValue;
+    }
+
+    public static double getNumDouble(Money money) {
+        double dou = 0;
+        if (money == null) {
+            dou = 0;
+        } else {
+            dou = Double.parseDouble(money.getAmount().toString());
+        }
+        String retValue = null;
+        retValue = new DecimalFormat("#0.00").format(dou);
+        return Double.parseDouble(retValue);
+    }
+    
+    public static String formate(Money money){
+    	if(money == null){
+    		return "";
+    	}
+    	String formate = ",###.##";
+    	StringBuffer ret = new StringBuffer("<em>");
+    	String temp = new DecimalFormat(formate).format(new BigDecimal(money.toString()));
+    	if(temp.lastIndexOf(".") == -1){
+    		ret.append(temp).append("</em>");
+    	}
+    	else{
+    		ret.append(temp.substring(0, temp.lastIndexOf(".") + 1)).append("</em>").append(temp.substring(temp.lastIndexOf(".")+1));
+    	}
+    	return ret.toString();
+    }
+
+    public static String getShowAmount(Money money) {
+        if (money == null) {
+            return "";
+        }
+        if ("0.00".equals(money.getAmount().toString())) {
+            return "--";
+        } else {
+            return money.getAmount().toString();
+        }
+    }
+
+    public static BigDecimal N_10000 = new BigDecimal("10000");
+    
+    //大于1万显示万元小于1万显示元
+    public static String getReadableMoney(Money money) {
+        if (money == null) {
+            return "";
+        }
+        String moneyString = "";//money直接转换过来的数据
+        String moneySuffix = "";//小数点及后两位的数据
+        String moneyPrefix = "";//小数点前的数据
+        if (money.getAmount().compareTo(N_10000) >= 0) {
+        	moneyString = (money.getAmount().divide(N_10000)).setScale(2,BigDecimal.ROUND_DOWN).toString();
+        	moneySuffix = moneyString.substring(moneyString.length()-3, moneyString.length());//小数点及后两位的数据
+        	
+        	if(".00".equals(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-3);//小数点前的数据
+        		return moneyPrefix + "万元";
+        	}else if("0".endsWith(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-1);//小数点前的数据
+        		return moneyPrefix + "万元";
+        	}
+            return ((money.getAmount().divide(N_10000)).setScale(2,BigDecimal.ROUND_DOWN)) + "万元";
+        } else {
+        	moneyString = money.toString();
+        	moneySuffix = moneyString.substring(moneyString.length()-3, moneyString.length());//小数点及后两位的数据
+        	if(".00".equals(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-3);//小数点前的数据
+        		return moneyPrefix + "元";
+        	}else if("0".endsWith(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-1);//小数点前的数据
+        		return moneyPrefix + "元";
+        	}
+            return money.toString() + "元";
+        }
+    }
+    
+  //大于1万显示万元小于1万显示元
+    public static String getReadableMoney1(Money money) {
+        if (money == null) {
+            return "";
+        }
+        String moneyString = "";//money直接转换过来的数据
+        String moneySuffix = "";//小数点及后两位的数据
+        String moneyPrefix = "";//小数点前的数据
+        if (money.getAmount().compareTo(N_10000) >= 0) {
+        	moneyString = (money.getAmount().divide(N_10000)).setScale(2,BigDecimal.ROUND_DOWN).toString();
+        	moneySuffix = moneyString.substring(moneyString.length()-3, moneyString.length());//小数点及后两位的数据
+        	
+        	if(".00".equals(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-3);//小数点前的数据
+        		return moneyPrefix + "万";
+        	}else if("0".endsWith(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-1);//小数点前的数据
+        		return moneyPrefix + "万";
+        	}
+            return ((money.getAmount().divide(N_10000)).setScale(2,BigDecimal.ROUND_DOWN)) + "万";
+        } else {
+        	moneyString = money.toString();
+        	moneySuffix = moneyString.substring(moneyString.length()-3, moneyString.length());//小数点及后两位的数据
+        	if(".00".equals(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-3);//小数点前的数据
+        		return moneyPrefix ;
+        	}else if("0".endsWith(moneySuffix)){
+        		moneyPrefix = moneyString.substring(0,moneyString.length()-1);//小数点前的数据
+        		return moneyPrefix ;
+        	}
+            return money.toString() ;
+        }
+    }
+    
+    //大于1万显示万份小于1万显示份
+    public static String getReadableMoneyFen(Object money) {
+    	if (money == null) {
+    		return "";
+    	}
+    	
+    	Money m2 = null;
+    	if(money instanceof Money){
+    		m2 = (Money)money;
+    	}
+    	else if(money instanceof BigDecimal){
+    		m2 = new Money((BigDecimal)money);
+    	}
+    	else{
+    		return "";
+    	}
+    	
+    	if (m2.getAmount().compareTo(N_10000) >= 0) {
+    		return ((m2.getAmount().divide(N_10000)).setScale(2,BigDecimal.ROUND_DOWN)) + "万份";
+    	} else {
+    		return money.toString() + "份";
+    	}
+    }
+    
+    //大于1万显示万元小于1万显示元
+    public static String getReadableMoney(Number money) {
+    	if (money == null) {
+    		return "";
+    	}
+    	return getReadableMoney(new Money(money.doubleValue()));
+    }
+ 
+    /**
+     * Divide two numbers. The result will be returned as Integer-type if and only if
+     * both sides of the division operator are Integer-types. Otherwise a Float, Double,
+     * or BigDecimal will be returned.
+     * 返回百分比
+     * @param 剩余
+     * @param 原始
+     * @return Division result.
+     */
+    public static Number divide (Number op1, Number op2) {
+         return MathUtils.multiply(MathUtils.divide(MathUtils.subtract(op2, op1), op2), 100);
+    }
+    
+    public static Money add (Money op1, Money op2) {
+    	return op1.add(op2);
+    }
+    
+    public static Money subtract(Money op1, Money op2) {
+    	if(op2 == null){
+    		return op1;
+    	}
+    	return op1.subtract(op2);
+    }
+    
+    /**
+     * Divide two numbers. The result will be returned as Integer-type if and only if
+     * both sides of the division operator are Integer-types. Otherwise a Float, Double,
+     * or BigDecimal will be returned.
+     * 返回百分比
+     * @param 剩余
+     * @param 原始
+     * @return Division result.
+     */
+    public static String multiply (BigDecimal op1, Number op2) {
+    	if(op2 == null){
+    		op2 = 100;
+    	}
+    	return df.format(MathUtils.multiply(op1, op2));
+    }
+    
+    public static String multiply (BigDecimal op1, BigDecimal op2, Number op3) {
+    	return df.format(op1.multiply(op2).divide(new BigDecimal(op3.doubleValue())));
+    }
+    
+    public static Money multiply (Money op1, BigDecimal op2) {
+    	return op1.multiply(op2);
+    }
+    
+    public static Money multiply (Money op1, Money op2) {
+    	return op1.multiply(op2.getAmount());
+    }
+    
+    private static DecimalFormat df = new DecimalFormat("#0.00");
+}
